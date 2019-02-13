@@ -15,6 +15,8 @@
 		E44894642213EE31008DB184 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E44894632213EE31008DB184 /* main.m */; };
 		E448946E2213EE32008DB184 /* KFACommonLibDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E448946D2213EE32008DB184 /* KFACommonLibDemoTests.m */; };
 		E44894792213EE32008DB184 /* KFACommonLibDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = E44894782213EE32008DB184 /* KFACommonLibDemoUITests.m */; };
+		E448948A2213F18F008DB184 /* KFAAttributeLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = E44894892213F18F008DB184 /* KFAAttributeLabel.m */; };
+		E44894912213F293008DB184 /* NSArray+KFASafe.m in Sources */ = {isa = PBXBuildFile; fileRef = E44894902213F293008DB184 /* NSArray+KFASafe.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,11 @@
 		E44894742213EE32008DB184 /* KFACommonLibDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KFACommonLibDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E44894782213EE32008DB184 /* KFACommonLibDemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFACommonLibDemoUITests.m; sourceTree = "<group>"; };
 		E448947A2213EE32008DB184 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E44894882213F18F008DB184 /* KFAAttributeLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFAAttributeLabel.h; sourceTree = "<group>"; };
+		E44894892213F18F008DB184 /* KFAAttributeLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFAAttributeLabel.m; sourceTree = "<group>"; };
+		E448948F2213F293008DB184 /* NSArray+KFASafe.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSArray+KFASafe.h"; sourceTree = "<group>"; };
+		E44894902213F293008DB184 /* NSArray+KFASafe.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSArray+KFASafe.m"; sourceTree = "<group>"; };
+		E44894922213F4A6008DB184 /* KFABasicMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFABasicMacro.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +108,9 @@
 		E44894532213EE30008DB184 /* KFACommonLibDemo */ = {
 			isa = PBXGroup;
 			children = (
+				E448948B2213F1F8008DB184 /* KFAMacro */,
+				E44894872213F159008DB184 /* KFAAdditions */,
+				E44894862213F159008DB184 /* KFAKit */,
 				E44894542213EE30008DB184 /* AppDelegate.h */,
 				E44894552213EE30008DB184 /* AppDelegate.m */,
 				E44894572213EE30008DB184 /* ViewController.h */,
@@ -130,6 +140,32 @@
 				E448947A2213EE32008DB184 /* Info.plist */,
 			);
 			path = KFACommonLibDemoUITests;
+			sourceTree = "<group>";
+		};
+		E44894862213F159008DB184 /* KFAKit */ = {
+			isa = PBXGroup;
+			children = (
+				E44894882213F18F008DB184 /* KFAAttributeLabel.h */,
+				E44894892213F18F008DB184 /* KFAAttributeLabel.m */,
+			);
+			path = KFAKit;
+			sourceTree = "<group>";
+		};
+		E44894872213F159008DB184 /* KFAAdditions */ = {
+			isa = PBXGroup;
+			children = (
+				E448948F2213F293008DB184 /* NSArray+KFASafe.h */,
+				E44894902213F293008DB184 /* NSArray+KFASafe.m */,
+			);
+			path = KFAAdditions;
+			sourceTree = "<group>";
+		};
+		E448948B2213F1F8008DB184 /* KFAMacro */ = {
+			isa = PBXGroup;
+			children = (
+				E44894922213F4A6008DB184 /* KFABasicMacro.h */,
+			);
+			path = KFAMacro;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -262,6 +298,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E44894912213F293008DB184 /* NSArray+KFASafe.m in Sources */,
+				E448948A2213F18F008DB184 /* KFAAttributeLabel.m in Sources */,
 				E44894592213EE30008DB184 /* ViewController.m in Sources */,
 				E44894642213EE31008DB184 /* main.m in Sources */,
 				E44894562213EE30008DB184 /* AppDelegate.m in Sources */,
