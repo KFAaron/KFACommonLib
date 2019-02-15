@@ -17,6 +17,8 @@
 		E44894792213EE32008DB184 /* KFACommonLibDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = E44894782213EE32008DB184 /* KFACommonLibDemoUITests.m */; };
 		E448948A2213F18F008DB184 /* KFAAttributeLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = E44894892213F18F008DB184 /* KFAAttributeLabel.m */; };
 		E44894912213F293008DB184 /* NSArray+KFASafe.m in Sources */ = {isa = PBXBuildFile; fileRef = E44894902213F293008DB184 /* NSArray+KFASafe.m */; };
+		E45DB9872215106A00B3377E /* KFAAttributeLabelController.m in Sources */ = {isa = PBXBuildFile; fileRef = E45DB9862215106A00B3377E /* KFAAttributeLabelController.m */; };
+		E45DB98A2215187B00B3377E /* UIView+KFAAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = E45DB9892215187B00B3377E /* UIView+KFAAdditions.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +60,10 @@
 		E448948F2213F293008DB184 /* NSArray+KFASafe.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSArray+KFASafe.h"; sourceTree = "<group>"; };
 		E44894902213F293008DB184 /* NSArray+KFASafe.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSArray+KFASafe.m"; sourceTree = "<group>"; };
 		E44894922213F4A6008DB184 /* KFABasicMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFABasicMacro.h; sourceTree = "<group>"; };
+		E45DB9852215106A00B3377E /* KFAAttributeLabelController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFAAttributeLabelController.h; sourceTree = "<group>"; };
+		E45DB9862215106A00B3377E /* KFAAttributeLabelController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFAAttributeLabelController.m; sourceTree = "<group>"; };
+		E45DB9882215187B00B3377E /* UIView+KFAAdditions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+KFAAdditions.h"; sourceTree = "<group>"; };
+		E45DB9892215187B00B3377E /* UIView+KFAAdditions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+KFAAdditions.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +126,8 @@
 				E448945F2213EE31008DB184 /* LaunchScreen.storyboard */,
 				E44894622213EE31008DB184 /* Info.plist */,
 				E44894632213EE31008DB184 /* main.m */,
+				E45DB9852215106A00B3377E /* KFAAttributeLabelController.h */,
+				E45DB9862215106A00B3377E /* KFAAttributeLabelController.m */,
 			);
 			path = KFACommonLibDemo;
 			sourceTree = "<group>";
@@ -156,6 +164,8 @@
 			children = (
 				E448948F2213F293008DB184 /* NSArray+KFASafe.h */,
 				E44894902213F293008DB184 /* NSArray+KFASafe.m */,
+				E45DB9882215187B00B3377E /* UIView+KFAAdditions.h */,
+				E45DB9892215187B00B3377E /* UIView+KFAAdditions.m */,
 			);
 			path = KFAAdditions;
 			sourceTree = "<group>";
@@ -302,7 +312,9 @@
 				E448948A2213F18F008DB184 /* KFAAttributeLabel.m in Sources */,
 				E44894592213EE30008DB184 /* ViewController.m in Sources */,
 				E44894642213EE31008DB184 /* main.m in Sources */,
+				E45DB9872215106A00B3377E /* KFAAttributeLabelController.m in Sources */,
 				E44894562213EE30008DB184 /* AppDelegate.m in Sources */,
+				E45DB98A2215187B00B3377E /* UIView+KFAAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
