@@ -13,6 +13,7 @@ void bpvDeallocCallback(void* ref) {
     
 }
 
+// 获取附件顶部距离基线的距离
 CGFloat bpvAscentCallback(void *ref) {
     KFAAttributeLabelAttachment *attachment = (__bridge KFAAttributeLabelAttachment *)ref;
     CGFloat ascent = 0;
@@ -38,6 +39,7 @@ CGFloat bpvAscentCallback(void *ref) {
     return ascent;
 }
 
+// 获取附件底部距离基线的距离
 CGFloat bpvDescentCallback(void *ref) {
     KFAAttributeLabelAttachment *attachment = (__bridge KFAAttributeLabelAttachment *)ref;
     CGFloat descent = 0;
@@ -70,18 +72,20 @@ CGFloat bpvDescentCallback(void *ref) {
     
 }
 
+// 获取附件宽度
 CGFloat bpvWidthCallback(void* ref) {
     KFAAttributeLabelAttachment *attachment  = (__bridge KFAAttributeLabelAttachment *)ref;
     return [attachment boxSize].width;
 }
 
+// 省略号的ASCLL码
 static NSString* const kEllipsesCharacter = @"\u2026"; // @"..."
 
 @interface KFAAttributeLabel ()
 {
-    CTFrameRef _textFrame;
-    CTFrameRef _attachmentFrame;
-    KFAAttributeLabelAttachment *_attachment;
+    CTFrameRef _textFrame; // 文字的frame
+    CTFrameRef _attachmentFrame; // 附件的frame
+    KFAAttributeLabelAttachment *_attachment; // 添加的附件(view)
     CGFloat _fontAscent;
     CGFloat _fontDescent;
 }
@@ -93,6 +97,7 @@ static NSString* const kEllipsesCharacter = @"\u2026"; // @"..."
 @implementation KFAAttributeLabel
 
 - (void)dealloc {
+    // 释放
     if (_textFrame) {
         CFRelease(_textFrame);
     }
@@ -115,21 +120,23 @@ static NSString* const kEllipsesCharacter = @"\u2026"; // @"..."
     return self;
 }
 
+// 初始化数据
 - (void)initData {
     
     _attributedString = [[NSMutableAttributedString alloc] init];
     _attachment = nil;
     _textFrame = nil;
     _attachmentFrame = nil;
+    // 字体默认为15号系统字体
     _font = [UIFont systemFontOfSize:15];
+    // 文字默认为黑色
     _textColor = [UIColor blackColor];
+    // 行间距和段间距默认为0
     _lineSpacing = 0.0;
     _paragraphSpacing = 0.0;
-    
-    if (nil == self.backgroundColor) {
-        self.backgroundColor = [UIColor whiteColor];
-    }
-    
+    // 背景色默认为白色
+    self.backgroundColor = [UIColor whiteColor];
+    // 可点击交互
     self.userInteractionEnabled = YES;
     [self resetFont];
 }
@@ -204,19 +211,26 @@ static NSString* const kEllipsesCharacter = @"\u2026"; // @"..."
     KFAAttributeLabelAttachment *attachment = [KFAAttributeLabelAttachment attachmentWith:view margin:margin alignment:alignment];
     attachment.fontAscent = _fontAscent;
     attachment.fontDescent = _fontDescent;
+    // 创建空白字符
     unichar objectReplacementChar = 0xFFFC;
+    // 以空白字符生成字符串
     NSString *objectReplacementString = [NSString stringWithCharacters:&objectReplacementChar length:1];
     NSMutableAttributedString *attachText = [[NSMutableAttributedString alloc] initWithString:objectReplacementString];
     
+    // 创建回调结构体 给代理提供回调的方法 获取附件占位的尺寸
     CTRunDelegateCallbacks callbacks;
-    callbacks.version = kCTRunDelegateVersion1;
-    callbacks.getAscent = bpvAscentCallback;
-    callbacks.getDescent = bpvDescentCallback;
-    callbacks.getWidth = bpvWidthCallback;
+    memset(&callbacks, 0, sizeof(callbacks)); // 开辟内存空间
+    callbacks.version = kCTRunDelegateVersion1; // 设置回调版本
+    callbacks.getAscent = bpvAscentCallback; // 设置view的顶部到基线的距离
+    callbacks.getDescent = bpvDescentCallback; // 设置view的底部到极限的距离
+    callbacks.getWidth = bpvWidthCallback; // 设置view的宽度
     callbacks.dealloc = bpvDeallocCallback;
+    // 创建代理 绑定附件（插入的view）
     CTRunDelegateRef delegate = CTRunDelegateCreate(&callbacks, (void *)attachment);
+    // 设置dialing
     NSDictionary *attr = [NSDictionary dictionaryWithObjectsAndKeys:(__bridge id)delegate,kCTRunDelegateAttributeName, nil];
     [attachText setAttributes:attr range:NSMakeRange(0, 1)];
+    // 释放代理
     CFRelease(delegate);
     
     _attachment = attachment;
@@ -256,12 +270,16 @@ static NSString* const kEllipsesCharacter = @"\u2026"; // @"..."
 }
 
 - (void)drawRect:(CGRect)rect {
+    // 获取当前绘制上下文
     CGContextRef ctx = UIGraphicsGetCurrentContext();
-    if (ctx == nil)
-    {
+    if (ctx == nil) {
         return;
     }
     CGContextSaveGState(ctx);
+    // coreText 起初是为OSX设计的，而OSX得坐标原点是左下角，y轴正方向朝上。iOS中坐标原点是左上角，y轴正方向向下。若不进行坐标转换，则文字从下开始，还是倒着的
+    // coreText使用的是系统坐标，然而我们平时所接触的iOS的都是屏幕坐标，所以要将屏幕坐标系转换系统坐标系，这样才能与我们想想的坐标互相对应。
+    // 先将画布向上平移一个屏幕高
+    // x轴缩放系数为1，则不变，y轴缩放系数为-1，则相当于以x轴为轴旋转180度
     CGAffineTransform transform = CGAffineTransformScale(CGAffineTransformMakeTranslation(0, self.bounds.size.height), 1.f, -1.f);
     CGContextConcatCTM(ctx, transform);
     
@@ -308,9 +326,13 @@ static NSString* const kEllipsesCharacter = @"\u2026"; // @"..."
 - (void)prepareTextFrame:(NSAttributedString *)string rect:(CGRect)rect {
     
     if (nil == _textFrame) {
+        // 生成frame
         CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)string);
+        // 创建绘制区域
         CGMutablePathRef path = CGPathCreateMutable();
+        // 添加绘制size
         CGPathAddRect(path, nil,rect);
+        // 工厂根据绘制区域及富文本（可选范围，多次设置）设置frame
         _textFrame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, 0), path, NULL);
         CGPathRelease(path);
         CFRelease(framesetter);
@@ -334,7 +356,7 @@ static NSString* const kEllipsesCharacter = @"\u2026"; // @"..."
     if (nil == ctx) {
         return;
     }
-    
+    // 根据frame获取需要绘制的线的数组
     CFArrayRef textLines = CTFrameGetLines(_textFrame);
     CFArrayRef attachmentlines = CTFrameGetLines(_attachmentFrame);
     const void * lastValue = CFArrayGetValueAtIndex(attachmentlines, CFArrayGetCount(attachmentlines)-1);
@@ -349,7 +371,7 @@ static NSString* const kEllipsesCharacter = @"\u2026"; // @"..."
     CTLineRef line = CFArrayGetValueAtIndex(lines, numberOfLines-1);
     CFArrayRef runs = CTLineGetGlyphRuns(line);
     CFIndex runCount = CFArrayGetCount(runs);
-    CGPoint lineOrigin = lineOrigins[numberOfLines-1];
+    CGPoint lineOrigin = lineOrigins[numberOfLines-1]; // 建立起点的数组
     CGFloat lineAscent;
     CGFloat lineDescent;
     CTLineGetTypographicBounds(line, &lineAscent, &lineDescent, NULL);
@@ -457,6 +479,7 @@ static NSString* const kEllipsesCharacter = @"\u2026"; // @"..."
             }
         }
     } else {
+        // 根据frame绘制文字
         CTFrameDraw(_textFrame, context);
     }
 }
