@@ -10,12 +10,14 @@
 #import "KFABasicMacro.h"
 #import "UIView+KFAAdditions.h"
 #import "KFAAttributeLabel.h"
+#import "UITextField+KFAPlaceholder.h"
 
 @interface KFAAttributeLabelController ()
 {
-    UILabel *_numLbl;
+//    UILabel *_numLbl;
     UIButton *_addBtn;
     UIButton *_minusBtn;
+    UITextField *_numLbl;
     
     KFAAttributeLabel *_demoLbl;
 }
@@ -37,10 +39,21 @@
     titleLbl.textColor = [UIColor orangeColor];
     titleLbl.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:titleLbl];
-    UILabel *numLbl = [[UILabel alloc] initWithFrame:CGRectMake((kScreenWidth-50)/2, 120, 50, 30)];
-    numLbl.text = @"0";
+//    UILabel *numLbl = [[UILabel alloc] initWithFrame:CGRectMake((kScreenWidth-50)/2, 120, 50, 30)];
+//    numLbl.text = @"0";
+//    numLbl.textColor = [UIColor redColor];
+//    numLbl.textAlignment = NSTextAlignmentCenter;
+    UITextField *numLbl = [[UITextField alloc] initWithFrame:CGRectMake((kScreenWidth-50)/2, 120, 50, 30)];
+    numLbl.borderStyle = UITextBorderStyleRoundedRect;
+//    numLbl.text = @"0";
     numLbl.textColor = [UIColor redColor];
     numLbl.textAlignment = NSTextAlignmentCenter;
+    
+    numLbl.placeholder = @"请输入行数";
+    numLbl.placeholderColor = [UIColor greenColor];
+    numLbl.placeholderFont = [UIFont systemFontOfSize:30];
+    
+    
     [self.view addSubview:numLbl];
     _numLbl = numLbl;
     
@@ -96,7 +109,7 @@
 - (void)minusLine:(id)sender {
     
     NSInteger num = _numLbl.text.integerValue - 1;
-    _numLbl.text = @(num).stringValue;
+    _numLbl.text = num==0?nil:@(num).stringValue;
     
     _minusBtn.enabled = num > 0;
     

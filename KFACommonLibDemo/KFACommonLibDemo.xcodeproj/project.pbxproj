@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E40ABCCA24D168AF00C2D48E /* UITextField+KFAPlaceholder.m in Sources */ = {isa = PBXBuildFile; fileRef = E40ABCC924D168AF00C2D48E /* UITextField+KFAPlaceholder.m */; };
 		E44894562213EE30008DB184 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E44894552213EE30008DB184 /* AppDelegate.m */; };
 		E44894592213EE30008DB184 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E44894582213EE30008DB184 /* ViewController.m */; };
 		E448945C2213EE30008DB184 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E448945A2213EE30008DB184 /* Main.storyboard */; };
@@ -39,6 +40,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E40ABCC824D168AF00C2D48E /* UITextField+KFAPlaceholder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITextField+KFAPlaceholder.h"; sourceTree = "<group>"; };
+		E40ABCC924D168AF00C2D48E /* UITextField+KFAPlaceholder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UITextField+KFAPlaceholder.m"; sourceTree = "<group>"; };
 		E44894512213EE30008DB184 /* KFACommonLibDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KFACommonLibDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E44894542213EE30008DB184 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		E44894552213EE30008DB184 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -166,6 +169,8 @@
 				E44894902213F293008DB184 /* NSArray+KFASafe.m */,
 				E45DB9882215187B00B3377E /* UIView+KFAAdditions.h */,
 				E45DB9892215187B00B3377E /* UIView+KFAAdditions.m */,
+				E40ABCC824D168AF00C2D48E /* UITextField+KFAPlaceholder.h */,
+				E40ABCC924D168AF00C2D48E /* UITextField+KFAPlaceholder.m */,
 			);
 			path = KFAAdditions;
 			sourceTree = "<group>";
@@ -309,6 +314,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E44894912213F293008DB184 /* NSArray+KFASafe.m in Sources */,
+				E40ABCCA24D168AF00C2D48E /* UITextField+KFAPlaceholder.m in Sources */,
 				E448948A2213F18F008DB184 /* KFAAttributeLabel.m in Sources */,
 				E44894592213EE30008DB184 /* ViewController.m in Sources */,
 				E44894642213EE31008DB184 /* main.m in Sources */,
